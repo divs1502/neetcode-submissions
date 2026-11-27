@@ -1,0 +1,26 @@
+class Solution {
+public:
+    bool isValid(string s) {
+        stack<char> st;
+        unordered_map<char, char> match = {
+            {')', '('},
+            {'}', '{'},
+            {']', '['}
+        };
+
+        for (char c : s) {
+            if (match.count(c)) {
+                // Closing bracket
+                if (st.empty() || st.top() != match[c]) {
+                    return false;
+                }
+                st.pop();
+            } else {
+                // Opening bracket
+                st.push(c);
+            }
+        }
+
+        return st.empty();
+    }
+};
